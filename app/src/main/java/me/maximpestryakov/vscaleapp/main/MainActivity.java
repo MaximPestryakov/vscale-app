@@ -3,7 +3,7 @@ package me.maximpestryakov.vscaleapp.main;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,21 +14,19 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import me.maximpestryakov.vscaleapp.App;
 import me.maximpestryakov.vscaleapp.R;
-import me.maximpestryakov.vscaleapp.api.model.Account;
 import me.maximpestryakov.vscaleapp.api.model.Server;
 import me.maximpestryakov.vscaleapp.api.settings.SettingsActivity;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity implements MainView {
 
     private MainPresenter presenter;
 
-    @BindView(R.id.server_list)
+    @BindView(R.id.serverList)
     RecyclerView serverList;
+
+    @BindView(R.id.addServer)
+    FloatingActionButton addServer;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
