@@ -18,7 +18,10 @@ public class Server {
 
     private boolean locked;
 
-    private String made_from;
+    @SerializedName("made_from")
+    private String madeFrom;
+
+    private String name;
 
     @SerializedName("private_address")
     private Address privateAddress;
@@ -30,8 +33,24 @@ public class Server {
 
     String status;
 
-    public String getHostname() {
-        return hostname;
+    public String getName() {
+        return name;
+    }
+
+    public String getOs() {
+        return madeFrom.split("_")[0];
+    }
+
+    public String getIpAddress() {
+        return publicAddress.address;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public String getRplan() {
+        return rplan;
     }
 
     public class Key {

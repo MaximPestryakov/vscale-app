@@ -1,6 +1,7 @@
 package me.maximpestryakov.vscaleapp.main;
 
 import android.content.Context;
+import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import me.maximpestryakov.vscaleapp.R;
 import me.maximpestryakov.vscaleapp.api.model.Server;
 
 public class ServerListAdapter extends RecyclerView.Adapter<ServerListAdapter.ServerViewHolder> {
@@ -26,7 +28,7 @@ public class ServerListAdapter extends RecyclerView.Adapter<ServerListAdapter.Se
     @Override
     public ServerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(android.R.layout.simple_list_item_1, parent, false);
+                .inflate(R.layout.server_list_item, parent, false);
         return new ServerViewHolder(view);
     }
 
@@ -42,8 +44,22 @@ public class ServerListAdapter extends RecyclerView.Adapter<ServerListAdapter.Se
 
     static class ServerViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(android.R.id.text1)
-        TextView hostname;
+        private Server server;
+
+        @BindView(R.id.name)
+        TextView name;
+
+        @BindView(R.id.osLogo)
+        AppCompatImageView osLogo;
+
+        @BindView(R.id.ipAddress)
+        TextView ipAddress;
+
+        @BindView(R.id.info)
+        TextView info;
+
+        @BindView(R.id.status)
+        AppCompatImageView status;
 
         public ServerViewHolder(View itemView) {
             super(itemView);
@@ -51,7 +67,55 @@ public class ServerListAdapter extends RecyclerView.Adapter<ServerListAdapter.Se
         }
 
         void setServer(Server server) {
-            hostname.setText(server.getHostname());
+            this.server = server;
+
+            name.setText(server.getName());
+            switch (server.getOs()) {
+                case "centos":
+                    osLogo.setImageResource(R.drawable.centos);
+                    break;
+                case "debian":
+                    osLogo.setImageResource(R.drawable.debian);
+                    break;
+                case "fedora":
+                    osLogo.setImageResource(R.drawable.fedora);
+                    break;
+                case "opensuse":
+                    osLogo.setImageResource(R.drawable.opensuse);
+                    break;
+                case "ubuntu":
+                    osLogo.setImageResource(R.drawable.ubuntu);
+                    break;
+            }
+            ipAddress.setText(server.getIpAddress());
+            switch (server.getStatus()) {
+                case "started":
+                    status.setImageResource(R.drawable.started);
+                    break;
+                case "stopped":
+                    status.setImageResource(R.drawable.stopped);
+                    break;
+                case "billing":
+                    status.setImageResource(R.drawable.billing);
+                    break;
+            }
+            switch (server.getRplan()) {
+                case "small":
+                    info.setText("512 МБ  20 ГБ  1 CPU  200 \u20BD");
+                    break;
+                case "medium":
+                    info.setText("1 ГБ  30 ГБ  1 CPU  400 \u20BD");
+                    break;
+                case "large":
+                    info.setText("2 ГБ  40 ГБ  2 CPU  800 \u20BD");
+                    break;
+                case "huge":
+                    info.setText("4 ГБ  60 ГБ  2 CPU  1 600 \u20BD");
+                    break;
+                case "monster":
+                    info.setText("8 ГБ  80 ГБ  4 CPU  3 200 \u20BD");
+                    break;
+            }
         }
     }
 }
