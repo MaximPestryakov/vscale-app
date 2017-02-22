@@ -3,6 +3,8 @@ package me.maximpestryakov.vscaleapp;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+import android.util.Log;
 
 import me.maximpestryakov.vscaleapp.api.VscaleApi;
 import okhttp3.OkHttpClient;
@@ -23,15 +25,14 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
 
-        sharedPref = getSharedPreferences(getString(R.string.preference_file_key),
-                Context.MODE_PRIVATE);
+        sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
 
         retrofit = new Retrofit.Builder()
                 .baseUrl(VSCALE_URl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(new OkHttpClient.Builder()
                         .addInterceptor(chain -> {
-                            String token = sharedPref.getString("token", "");
+                            String token = sharedPref.getString("token_preference", "");
                             return chain.proceed(chain.request().newBuilder()
                                     .header("X-Token", token)
                                     .build());
