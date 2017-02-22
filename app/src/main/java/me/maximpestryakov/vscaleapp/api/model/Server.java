@@ -2,6 +2,8 @@ package me.maximpestryakov.vscaleapp.api.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class Server {
 
     private boolean active;
@@ -10,7 +12,7 @@ public class Server {
 
     private String hostname;
 
-    private SshKey keys;
+    private List<Key> keys;
 
     private String location;
 
@@ -28,7 +30,11 @@ public class Server {
 
     String status;
 
-    public class SshKey {
+    public String getHostname() {
+        return hostname;
+    }
+
+    public class Key {
 
         private String name;
 

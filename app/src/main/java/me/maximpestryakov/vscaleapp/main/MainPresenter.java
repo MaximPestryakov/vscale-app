@@ -2,6 +2,7 @@ package me.maximpestryakov.vscaleapp.main;
 
 import android.util.Log;
 
+import java.io.IOException;
 import java.util.List;
 
 import me.maximpestryakov.vscaleapp.App;
