@@ -44,22 +44,17 @@ public class ServerListAdapter extends RecyclerView.Adapter<ServerListAdapter.Se
 
     static class ServerViewHolder extends RecyclerView.ViewHolder {
 
-        private Server server;
-
         @BindView(R.id.name)
         TextView name;
-
         @BindView(R.id.osLogo)
         AppCompatImageView osLogo;
-
         @BindView(R.id.ipAddress)
         TextView ipAddress;
-
         @BindView(R.id.info)
         TextView info;
-
         @BindView(R.id.status)
         AppCompatImageView status;
+        private Server server;
 
         public ServerViewHolder(View itemView) {
             super(itemView);
@@ -71,32 +66,32 @@ public class ServerListAdapter extends RecyclerView.Adapter<ServerListAdapter.Se
 
             name.setText(server.getName());
             switch (server.getOs()) {
-                case "centos":
-                    osLogo.setImageResource(R.drawable.centos);
+                case "ic_centos":
+                    osLogo.setImageResource(R.drawable.ic_centos);
                     break;
-                case "debian":
-                    osLogo.setImageResource(R.drawable.debian);
+                case "ic_debian":
+                    osLogo.setImageResource(R.drawable.ic_debian);
                     break;
-                case "fedora":
-                    osLogo.setImageResource(R.drawable.fedora);
+                case "ic_fedora":
+                    osLogo.setImageResource(R.drawable.ic_fedora);
                     break;
-                case "opensuse":
-                    osLogo.setImageResource(R.drawable.opensuse);
+                case "ic_opensuse":
+                    osLogo.setImageResource(R.drawable.ic_opensuse);
                     break;
-                case "ubuntu":
-                    osLogo.setImageResource(R.drawable.ubuntu);
+                case "ic_ubuntu":
+                    osLogo.setImageResource(R.drawable.ic_ubuntu);
                     break;
             }
             ipAddress.setText(server.getIpAddress());
             switch (server.getStatus()) {
-                case "started":
-                    status.setImageResource(R.drawable.started);
+                case "ic_started":
+                    status.setImageResource(R.drawable.ic_started);
                     break;
-                case "stopped":
-                    status.setImageResource(R.drawable.stopped);
+                case "ic_stopped":
+                    status.setImageResource(R.drawable.ic_stopped);
                     break;
-                case "billing":
-                    status.setImageResource(R.drawable.billing);
+                case "ic_billing":
+                    status.setImageResource(R.drawable.ic_billing);
                     break;
             }
             switch (server.getRplan()) {

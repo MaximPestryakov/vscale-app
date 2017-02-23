@@ -13,7 +13,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        app:srcCompat="@drawable/ubuntu" />
+        app:srcCompat="@drawable/ic_ubuntu" />
 
     <TextView
         android:id="@+id/name"
@@ -64,5 +64,5 @@
         android:layout_marginTop="16dp"
         android:fontFamily="sans-serif"
         android:textColor="#757575"
-        app:srcCompat="@drawable/started" />
+        app:srcCompat="@drawable/ic_started" />
 </RelativeLayout>

@@ -1,10 +1,8 @@
 package me.maximpestryakov.vscaleapp;
 
 import android.app.Application;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
 import me.maximpestryakov.vscaleapp.api.VscaleApi;
 import okhttp3.OkHttpClient;
@@ -20,6 +18,14 @@ public class App extends Application {
     private static SharedPreferences sharedPref;
 
     private Retrofit retrofit;
+
+    public static VscaleApi getApi() {
+        return api;
+    }
+
+    public static SharedPreferences getSharedPreferences() {
+        return sharedPref;
+    }
 
     @Override
     public void onCreate() {
@@ -41,13 +47,5 @@ public class App extends Application {
                 .build();
 
         api = retrofit.create(VscaleApi.class);
-    }
-
-    public static VscaleApi getApi() {
-        return api;
-    }
-
-    public static SharedPreferences getSharedPreferences() {
-        return sharedPref;
     }
 }

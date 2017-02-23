@@ -6,32 +6,21 @@ import java.util.List;
 
 public class Server {
 
+    String status;
     private boolean active;
-
     private int ctid;
-
     private String hostname;
-
     private List<Key> keys;
-
     private String location;
-
     private boolean locked;
-
     @SerializedName("made_from")
     private String madeFrom;
-
     private String name;
-
     @SerializedName("private_address")
     private Address privateAddress;
-
     @SerializedName("public_address")
     private Address publicAddress;
-
     private String rplan;
-
-    String status;
 
     public String getName() {
         return name;

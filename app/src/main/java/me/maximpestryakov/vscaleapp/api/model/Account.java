@@ -6,6 +6,10 @@ public class Account {
 
     Info info;
 
+    public String getName() {
+        return info.name;
+    }
+
     public static class Info {
         private String actdate;
 
@@ -33,9 +37,5 @@ public class Account {
 
         private String surname;
 
-    }
-
-    public String getName() {
-        return info.name;
     }
 }

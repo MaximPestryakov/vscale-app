@@ -1,12 +1,8 @@
 package me.maximpestryakov.vscaleapp.main;
 
-import android.util.Log;
-
-import java.io.IOException;
 import java.util.List;
 
 import me.maximpestryakov.vscaleapp.App;
-import me.maximpestryakov.vscaleapp.api.model.Account;
 import me.maximpestryakov.vscaleapp.api.model.Server;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -24,6 +20,7 @@ public class MainPresenter {
         if (App.getSharedPreferences().getString("token_preference", "").isEmpty()) {
             view.showTokenWarning("Токен не установлен",
                     "Для работы приложения необходимо установить токен");
+            return;
         }
 
         App.getApi().getServers().enqueue(new Callback<List<Server>>() {

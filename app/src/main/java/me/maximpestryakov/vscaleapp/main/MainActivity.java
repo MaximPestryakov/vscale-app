@@ -20,13 +20,15 @@ import me.maximpestryakov.vscaleapp.api.settings.SettingsActivity;
 
 public class MainActivity extends AppCompatActivity implements MainView {
 
-    private MainPresenter presenter;
-
     @BindView(R.id.serverList)
     RecyclerView serverList;
 
     @BindView(R.id.addServer)
     FloatingActionButton addServer;
+
+    private AlertDialog warningDialog;
+    private MainPresenter presenter;
+    private MainDataFragment fragment;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,30 +38,70 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
         presenter = new MainPresenter(this);
 
-        presenter.loadServerList();
+        if (savedInstanceState == null) {
+            fragment = new MainDataFragment();
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.mainFragmentContainer, fragment)
+                    .commit();
+        } else {
+            fragment = (MainDataFragment) getSupportFragmentManager()
+                    .findFragmentById(R.id.mainFragmentContainer);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        switch (fragment.getState()) {
+            case State.SHOW_TOKEN_WARNING:
+                showTokenWarning(fragment.getDialogTitle(), fragment.getDialogMessage());
+                break;
+            case State.SHOW_SERVER_LIST:
+                showServerList(fragment.getServers());
+                break;
+            default:
+                presenter.loadServerList();
+                break;
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (warningDialog != null) {
+            warningDialog.dismiss();
+        }
     }
 
     @Override
     public void showServerList(List<Server> servers) {
-        Log.d("showServerList", "here");
+        fragment.setState(State.SHOW_SERVER_LIST);
+        fragment.setServers(servers);
+
         serverList.setHasFixedSize(true);
         serverList.setLayoutManager(new LinearLayoutManager(this));
         serverList.setAdapter(new ServerListAdapter(this, servers));
     }
 
     @Override
-    public void showTokenWarning(String titile, String message) {
-        new AlertDialog.Builder(this)
-                .setTitle(titile)
+    public void showTokenWarning(String title, String message) {
+        fragment.setState(State.SHOW_TOKEN_WARNING);
+        fragment.setDialogTitle(title);
+        fragment.setDialogMessage(message);
+
+        warningDialog = new AlertDialog.Builder(this)
+                .setTitle(title)
                 .setMessage(message)
                 .setCancelable(false)
                 .setPositiveButton("Перейти в настройки", (dialog, which) -> {
                     Intent intent = new Intent(this, SettingsActivity.class);
+                    fragment.setState(-1);
                     startActivity(intent);
 
                 })
                 .setNegativeButton("Выход", (dialog, which) -> finish())
-                .create()
-                .show();
+                .create();
+        warningDialog.show();
     }
 }
