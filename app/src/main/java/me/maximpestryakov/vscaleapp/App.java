@@ -17,6 +17,7 @@ public class App extends Application {
 
     private static VscaleApi api;
     private static SharedPreferences sharedPref;
+    private static Resources resources;
 
     private Retrofit retrofit;
 
@@ -29,7 +30,7 @@ public class App extends Application {
     }
 
     public static String string(int resId) {
-        return Resources.getSystem().getString(resId);
+        return resources.getString(resId);
     }
 
     @Override
@@ -37,6 +38,8 @@ public class App extends Application {
         super.onCreate();
 
         sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+
+        resources = getResources();
 
         retrofit = new Retrofit.Builder()
                 .baseUrl(VSCALE_URl)
