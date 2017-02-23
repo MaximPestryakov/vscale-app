@@ -23,35 +23,35 @@ public class MainDataFragment extends Fragment {
         setRetainInstance(true);
     }
 
-    public void setState(int state) {
-        this.state = state;
-    }
-
     public int getState() {
         return state;
     }
 
-    public void setServers(List<Server> servers) {
-        this.servers = servers;
+    public void setState(int state) {
+        this.state = state;
     }
 
     public List<Server> getServers() {
         return servers;
     }
 
-    public void setDialogTitle(String dialogTitle) {
-        this.dialogTitle = dialogTitle;
+    public void setServers(List<Server> servers) {
+        this.servers = servers;
     }
 
     public String getDialogTitle() {
         return dialogTitle;
     }
 
-    public void setDialogMessage(String dialogMessage) {
-        this.dialogMessage = dialogMessage;
+    public void setDialogTitle(String dialogTitle) {
+        this.dialogTitle = dialogTitle;
     }
 
     public String getDialogMessage() {
         return dialogMessage;
+    }
+
+    public void setDialogMessage(String dialogMessage) {
+        this.dialogMessage = dialogMessage;
     }
 }

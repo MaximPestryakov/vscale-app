@@ -3,6 +3,7 @@ package me.maximpestryakov.vscaleapp.main;
 import java.util.List;
 
 import me.maximpestryakov.vscaleapp.App;
+import me.maximpestryakov.vscaleapp.R;
 import me.maximpestryakov.vscaleapp.api.model.Server;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -17,9 +18,13 @@ public class MainPresenter {
     }
 
     void loadServerList() {
-        if (App.getSharedPreferences().getString("token_preference", "").isEmpty()) {
-            view.showTokenWarning("Токен не установлен",
-                    "Для работы приложения необходимо установить токен");
+        view.showLoading();
+
+        if (App.getSharedPreferences().getString(
+                App.string(R.string.token_preference_key), "").isEmpty()) {
+            view.showTokenWarning(
+                    App.string(R.string.no_token),
+                    App.string(R.string.need_token));
             return;
         }
 
@@ -27,11 +32,13 @@ public class MainPresenter {
             @Override
             public void onResponse(Call<List<Server>> call, Response<List<Server>> response) {
                 if (response.code() == 401) {
-                    view.showTokenWarning("Токен не установлен",
-                            "Для работы приложения необходимо установить токен");
+                    view.showTokenWarning(
+                            App.string(R.string.no_token),
+                            App.string(R.string.need_token));
                 } else if (response.code() == 403) {
-                    view.showTokenWarning("Неверный токен",
-                            "Для работы приложения необходимо установить верный токен");
+                    view.showTokenWarning(
+                            App.string(R.string.wrong_token),
+                            App.string(R.string.need_right_token));
                 } else if (response.code() == 200) {
                     view.showServerList(response.body());
                 }
@@ -42,23 +49,5 @@ public class MainPresenter {
                 t.printStackTrace();
             }
         });
-
-        /*
-        App.getApi().getAccount().enqueue(new Callback<Account>() {
-            @Override
-            public void onResponse(Call<Account> call, Response<Account> response) {
-                Log.d("CODE", response.code() + "");
-                Account account = response.body();
-                if (account != null) {
-                    Log.d("NAME:", response.body().getName());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Account> call, Throwable t) {
-                t.printStackTrace();
-            }
-        });
-        */
     }
 }

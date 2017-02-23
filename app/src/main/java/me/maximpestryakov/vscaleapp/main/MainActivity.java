@@ -4,11 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 
 import java.util.List;
 
@@ -25,6 +25,9 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
     @BindView(R.id.addServer)
     FloatingActionButton addServer;
+
+    @BindView(R.id.refreshServerList)
+    SwipeRefreshLayout refreshServerList;
 
     private AlertDialog warningDialog;
     private MainPresenter presenter;
@@ -48,6 +51,8 @@ public class MainActivity extends AppCompatActivity implements MainView {
             fragment = (MainDataFragment) getSupportFragmentManager()
                     .findFragmentById(R.id.mainFragmentContainer);
         }
+
+        refreshServerList.setOnRefreshListener(presenter::loadServerList);
     }
 
     @Override
@@ -81,7 +86,9 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
         serverList.setHasFixedSize(true);
         serverList.setLayoutManager(new LinearLayoutManager(this));
-        serverList.setAdapter(new ServerListAdapter(this, servers));
+        serverList.setAdapter(new ServerListAdapter(servers));
+
+        refreshServerList.setRefreshing(false);
     }
 
     @Override
@@ -90,18 +97,28 @@ public class MainActivity extends AppCompatActivity implements MainView {
         fragment.setDialogTitle(title);
         fragment.setDialogMessage(message);
 
+        refreshServerList.setRefreshing(false);
+
+
         warningDialog = new AlertDialog.Builder(this)
                 .setTitle(title)
                 .setMessage(message)
                 .setCancelable(false)
-                .setPositiveButton("Перейти в настройки", (dialog, which) -> {
+                .setPositiveButton(getString(R.string.go_to_settings), (dialog, which) -> {
                     Intent intent = new Intent(this, SettingsActivity.class);
                     fragment.setState(-1);
                     startActivity(intent);
 
                 })
-                .setNegativeButton("Выход", (dialog, which) -> finish())
+                .setNegativeButton(getString(R.string.exit), (dialog, which) -> finish())
                 .create();
         warningDialog.show();
+    }
+
+    @Override
+    public void showLoading() {
+        fragment.setState(State.SHOW_LOADING);
+
+        refreshServerList.setRefreshing(true);
     }
 }

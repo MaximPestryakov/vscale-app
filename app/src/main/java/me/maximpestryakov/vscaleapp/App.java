@@ -2,6 +2,7 @@ package me.maximpestryakov.vscaleapp;
 
 import android.app.Application;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.preference.PreferenceManager;
 
 import me.maximpestryakov.vscaleapp.api.VscaleApi;
@@ -27,6 +28,10 @@ public class App extends Application {
         return sharedPref;
     }
 
+    public static String string(int resId) {
+        return Resources.getSystem().getString(resId);
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -38,7 +43,8 @@ public class App extends Application {
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(new OkHttpClient.Builder()
                         .addInterceptor(chain -> {
-                            String token = sharedPref.getString("token_preference", "");
+                            String token = sharedPref.getString(
+                                    getString(R.string.token_preference_key), "");
                             return chain.proceed(chain.request().newBuilder()
                                     .header("X-Token", token)
                                     .build());

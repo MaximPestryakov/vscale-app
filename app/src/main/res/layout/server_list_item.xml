@@ -25,7 +25,7 @@
         android:layout_toEndOf="@+id/osLogo"
         android:layout_toRightOf="@+id/osLogo"
         android:fontFamily="sans-serif"
-        android:text="Test"
+        android:text="Name"
         android:textColor="#212121"
         android:textSize="16sp" />
 
@@ -37,7 +37,7 @@
         android:layout_alignStart="@+id/name"
         android:layout_below="@+id/name"
         android:fontFamily="sans-serif"
-        android:text="77.244.215.21"
+        android:text="IP address"
         android:textColor="#757575"
         android:textSize="14sp" />
 
@@ -49,7 +49,7 @@
         android:layout_alignStart="@+id/name"
         android:layout_below="@+id/ipAddress"
         android:fontFamily="sans-serif"
-        android:text="512 МБ RAM 20 ГБ SSD 1 CPU 200 ₽"
+        android:text="Info"
         android:textColor="#757575"
         android:textSize="14sp" />
 

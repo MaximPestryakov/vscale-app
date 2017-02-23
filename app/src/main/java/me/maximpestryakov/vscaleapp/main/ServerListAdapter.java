@@ -1,6 +1,5 @@
 package me.maximpestryakov.vscaleapp.main;
 
-import android.content.Context;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,16 +11,15 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import me.maximpestryakov.vscaleapp.App;
 import me.maximpestryakov.vscaleapp.R;
 import me.maximpestryakov.vscaleapp.api.model.Server;
 
 public class ServerListAdapter extends RecyclerView.Adapter<ServerListAdapter.ServerViewHolder> {
 
-    private Context context;
     private List<Server> servers;
 
-    public ServerListAdapter(Context context, List<Server> servers) {
-        this.context = context;
+    public ServerListAdapter(List<Server> servers) {
         this.servers = servers;
     }
 
@@ -66,49 +64,49 @@ public class ServerListAdapter extends RecyclerView.Adapter<ServerListAdapter.Se
 
             name.setText(server.getName());
             switch (server.getOs()) {
-                case "ic_centos":
+                case "centos":
                     osLogo.setImageResource(R.drawable.ic_centos);
                     break;
-                case "ic_debian":
+                case "debian":
                     osLogo.setImageResource(R.drawable.ic_debian);
                     break;
-                case "ic_fedora":
+                case "fedora":
                     osLogo.setImageResource(R.drawable.ic_fedora);
                     break;
-                case "ic_opensuse":
+                case "opensuse":
                     osLogo.setImageResource(R.drawable.ic_opensuse);
                     break;
-                case "ic_ubuntu":
+                case "ubuntu":
                     osLogo.setImageResource(R.drawable.ic_ubuntu);
                     break;
             }
             ipAddress.setText(server.getIpAddress());
             switch (server.getStatus()) {
-                case "ic_started":
+                case "started":
                     status.setImageResource(R.drawable.ic_started);
                     break;
-                case "ic_stopped":
+                case "stopped":
                     status.setImageResource(R.drawable.ic_stopped);
                     break;
-                case "ic_billing":
+                case "billing":
                     status.setImageResource(R.drawable.ic_billing);
                     break;
             }
             switch (server.getRplan()) {
                 case "small":
-                    info.setText("512 МБ  20 ГБ  1 CPU  200 \u20BD");
+                    info.setText(App.string(R.string.rplan_info_small));
                     break;
                 case "medium":
-                    info.setText("1 ГБ  30 ГБ  1 CPU  400 \u20BD");
+                    info.setText(App.string(R.string.rplan_info_medium));
                     break;
                 case "large":
-                    info.setText("2 ГБ  40 ГБ  2 CPU  800 \u20BD");
+                    info.setText(App.string(R.string.rplan_info_large));
                     break;
                 case "huge":
-                    info.setText("4 ГБ  60 ГБ  2 CPU  1 600 \u20BD");
+                    info.setText(App.string(R.string.rplan_info_huge));
                     break;
                 case "monster":
-                    info.setText("8 ГБ  80 ГБ  4 CPU  3 200 \u20BD");
+                    info.setText(App.string(R.string.rplan_info_monster));
                     break;
             }
         }
