@@ -42,14 +42,14 @@ public class Server {
         return rplan;
     }
 
-    public class Key {
+    private class Key {
 
         private String name;
 
         private int id;
     }
 
-    public class Address {
+    private class Address {
 
         private String address;
 

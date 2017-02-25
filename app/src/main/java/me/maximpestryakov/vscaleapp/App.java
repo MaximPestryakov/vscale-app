@@ -13,13 +13,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class App extends Application {
 
-    private final static String VSCALE_URl = "https://api.vscale.io/v1/";
+    private static final String VSCALE_URl = "https://api.vscale.io/v1/";
 
     private static VscaleApi api;
     private static SharedPreferences sharedPref;
     private static Resources resources;
-
-    private Retrofit retrofit;
 
     public static VscaleApi getApi() {
         return api;
@@ -41,7 +39,7 @@ public class App extends Application {
 
         resources = getResources();
 
-        retrofit = new Retrofit.Builder()
+        Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(VSCALE_URl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(new OkHttpClient.Builder()

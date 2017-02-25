@@ -1,4 +1,4 @@
-package me.maximpestryakov.vscaleapp.api.settings;
+package me.maximpestryakov.vscaleapp.settings;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

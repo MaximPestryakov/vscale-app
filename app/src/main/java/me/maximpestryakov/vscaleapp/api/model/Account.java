@@ -4,13 +4,13 @@ import com.google.gson.annotations.SerializedName;
 
 public class Account {
 
-    Info info;
+    private Info info;
 
     public String getName() {
         return info.name;
     }
 
-    public static class Info {
+    private static class Info {
         private String actdate;
 
         private String country;

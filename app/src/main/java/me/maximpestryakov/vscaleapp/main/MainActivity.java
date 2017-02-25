@@ -16,7 +16,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.maximpestryakov.vscaleapp.R;
 import me.maximpestryakov.vscaleapp.api.model.Server;
-import me.maximpestryakov.vscaleapp.api.settings.SettingsActivity;
+import me.maximpestryakov.vscaleapp.settings.SettingsActivity;
 
 public class MainActivity extends AppCompatActivity implements MainView {
 

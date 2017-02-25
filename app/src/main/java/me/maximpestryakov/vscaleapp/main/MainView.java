@@ -4,7 +4,7 @@ import java.util.List;
 
 import me.maximpestryakov.vscaleapp.api.model.Server;
 
-public interface MainView {
+interface MainView {
 
     void showServerList(List<Server> servers);
 
@@ -13,9 +13,11 @@ public interface MainView {
     void showLoading();
 
     class State {
-        public static final int SHOW_TOKEN_WARNING = 0;
-        public static final int SHOW_SERVER_LIST = 1;
-        public static final int SHOW_LOADING = 2;
+        static final int SHOW_TOKEN_WARNING = 0;
+        static final int SHOW_SERVER_LIST = 1;
+        static final int SHOW_LOADING = 2;
 
+        private State() {
+        }
     }
 }
