@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/serverUpdate"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/serverLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/serverOsLogo"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            app:srcCompat="@drawable/ic_ubuntu" />
+
+        <TextView
+            android:id="@+id/serverName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/serverOsLogo"
+            android:layout_marginEnd="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_toEndOf="@+id/serverOsLogo"
+            android:layout_toRightOf="@+id/serverOsLogo"
+            android:text="Ubuntu 16.04 64bit"
+            android:textColor="#212121"
+            android:textSize="24dp" />
+
+        <TextView
+            android:id="@+id/serverInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/serverName"
+            android:layout_alignLeft="@+id/serverName"
+            android:layout_alignRight="@+id/serverName"
+            android:layout_alignStart="@+id/serverName"
+            android:layout_below="@+id/serverName"
+            android:text="MSK  512 МБ RAM  20 ГБ SSD  1 CPU  200 ₽"
+            android:textColor="#757575"
+            android:textSize="14sp" />
+
+    </RelativeLayout>
+
+</android.support.v4.widget.SwipeRefreshLayout>

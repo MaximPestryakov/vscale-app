@@ -2,15 +2,18 @@ package me.maximpestryakov.vscaleapp.api.model;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
+import io.realm.RealmList;
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
-public class Server {
+public class Server extends RealmObject {
 
-    String status;
+    private String status;
     private boolean active;
+    @PrimaryKey
     private int ctid;
     private String hostname;
-    private List<Key> keys;
+    private RealmList<Key> keys;
     private String location;
     private boolean locked;
     @SerializedName("made_from")
@@ -20,41 +23,57 @@ public class Server {
     private Address privateAddress;
     @SerializedName("public_address")
     private Address publicAddress;
-    private String rplan;
+    @SerializedName("rplan")
+    private String plan;
+
+    public Server() {
+    }
 
     public String getName() {
         return name;
     }
 
-    public String getOs() {
-        return madeFrom.split("_")[0];
+    public Os getOs() {
+        return Os.valueOf(madeFrom.split("_")[0].toUpperCase());
+    }
+
+    public String getMadeFrom() {
+        return madeFrom;
     }
 
     public String getIpAddress() {
-        return publicAddress.address;
+        return publicAddress.getAddress();
     }
 
-    public String getStatus() {
-        return status;
+    public Status getStatus() {
+        return Status.valueOf(status.toUpperCase());
     }
 
-    public String getRplan() {
-        return rplan;
+    public Plan getPlan() {
+        return Plan.valueOf(plan.toUpperCase());
     }
 
-    private class Key {
-
-        private String name;
-
-        private int id;
+    public int getCtid() {
+        return ctid;
     }
 
-    private class Address {
+    public Location getLocation() {
+        return Location.valueOf(location.substring(0, 2).toUpperCase());
+    }
 
-        private String address;
+    public enum Status {
+        STARTED, STOPPED, BILLING
+    }
 
-        private String gateway;
+    public enum Location {
+        MSK, SPB
+    }
 
-        private String netmask;
+    public enum Plan {
+        SMALL, MEDIUM, LARGE, HUGE, MONSTER
+    }
+
+    public enum Os {
+        CENTOS, DEBIAN, FEDORA, OPENSUSE, UBUNTU
     }
 }

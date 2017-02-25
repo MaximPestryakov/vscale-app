@@ -1,13 +1,9 @@
 package me.maximpestryakov.vscaleapp.main;
 
-import java.util.List;
-
+import io.realm.Realm;
 import me.maximpestryakov.vscaleapp.App;
 import me.maximpestryakov.vscaleapp.R;
-import me.maximpestryakov.vscaleapp.api.model.Server;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import me.maximpestryakov.vscaleapp.util.MyCallback;
 
 class MainPresenter {
 
@@ -28,26 +24,25 @@ class MainPresenter {
             return;
         }
 
-        App.getApi().getServers().enqueue(new Callback<List<Server>>() {
-            @Override
-            public void onResponse(Call<List<Server>> call, Response<List<Server>> response) {
-                if (response.code() == 401) {
-                    view.showTokenWarning(
-                            App.string(R.string.no_token),
-                            App.string(R.string.need_token));
-                } else if (response.code() == 403) {
-                    view.showTokenWarning(
-                            App.string(R.string.wrong_token),
-                            App.string(R.string.need_right_token));
-                } else if (response.code() == 200) {
-                    view.showServerList(response.body());
-                }
-            }
+        App.getApi().getServers().enqueue(new MyCallback<>(
+                (call, response) -> {
+                    if (response.isSuccessful()) {
+                        Realm realm = Realm.getDefaultInstance();
+                        realm.beginTransaction();
+                        realm.copyToRealmOrUpdate(response.body());
+                        realm.commitTransaction();
+                        view.showServerList();
 
-            @Override
-            public void onFailure(Call<List<Server>> call, Throwable t) {
-                t.printStackTrace();
-            }
-        });
+                    } else if (response.code() == 401) {
+                        view.showTokenWarning(
+                                App.string(R.string.no_token),
+                                App.string(R.string.need_token));
+                    } else if (response.code() == 403) {
+                        view.showTokenWarning(
+                                App.string(R.string.wrong_token),
+                                App.string(R.string.need_right_token));
+                    }
+                },
+                (call, t) -> view.showInternetConnectionProblem()));
     }
 }

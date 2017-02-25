@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.preference.PreferenceManager;
 
+import io.realm.Realm;
 import me.maximpestryakov.vscaleapp.api.VscaleApi;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -34,6 +35,8 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        Realm.init(this);
 
         sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
 

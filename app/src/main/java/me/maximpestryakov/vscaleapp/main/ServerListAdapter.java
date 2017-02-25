@@ -1,5 +1,7 @@
 package me.maximpestryakov.vscaleapp.main;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,12 +16,15 @@ import butterknife.ButterKnife;
 import me.maximpestryakov.vscaleapp.App;
 import me.maximpestryakov.vscaleapp.R;
 import me.maximpestryakov.vscaleapp.api.model.Server;
+import me.maximpestryakov.vscaleapp.server.ServerActivity;
 
-public class ServerListAdapter extends RecyclerView.Adapter<ServerListAdapter.ServerViewHolder> {
+class ServerListAdapter extends RecyclerView.Adapter<ServerListAdapter.ServerViewHolder> {
 
+    private Context context;
     private List<Server> servers;
 
-    public ServerListAdapter(List<Server> servers) {
+    ServerListAdapter(Context context, List<Server> servers) {
+        this.context = context;
         this.servers = servers;
     }
 
@@ -32,7 +37,13 @@ public class ServerListAdapter extends RecyclerView.Adapter<ServerListAdapter.Se
 
     @Override
     public void onBindViewHolder(ServerViewHolder holder, int position) {
-        holder.setServer(servers.get(position));
+        Server server = servers.get(position);
+        holder.setServer(server);
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, ServerActivity.class);
+            intent.putExtra("ctid", server.getCtid());
+            context.startActivity(intent);
+        });
     }
 
     @Override
@@ -54,7 +65,7 @@ public class ServerListAdapter extends RecyclerView.Adapter<ServerListAdapter.Se
         AppCompatImageView status;
         private Server server;
 
-        public ServerViewHolder(View itemView) {
+        ServerViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
@@ -64,48 +75,48 @@ public class ServerListAdapter extends RecyclerView.Adapter<ServerListAdapter.Se
 
             name.setText(server.getName());
             switch (server.getOs()) {
-                case "centos":
+                case CENTOS:
                     osLogo.setImageResource(R.drawable.ic_centos);
                     break;
-                case "debian":
+                case DEBIAN:
                     osLogo.setImageResource(R.drawable.ic_debian);
                     break;
-                case "fedora":
+                case FEDORA:
                     osLogo.setImageResource(R.drawable.ic_fedora);
                     break;
-                case "opensuse":
+                case OPENSUSE:
                     osLogo.setImageResource(R.drawable.ic_opensuse);
                     break;
-                case "ubuntu":
+                case UBUNTU:
                     osLogo.setImageResource(R.drawable.ic_ubuntu);
                     break;
             }
             ipAddress.setText(server.getIpAddress());
             switch (server.getStatus()) {
-                case "started":
+                case STARTED:
                     status.setImageResource(R.drawable.ic_started);
                     break;
-                case "stopped":
+                case STOPPED:
                     status.setImageResource(R.drawable.ic_stopped);
                     break;
-                case "billing":
+                case BILLING:
                     status.setImageResource(R.drawable.ic_billing);
                     break;
             }
-            switch (server.getRplan()) {
-                case "small":
+            switch (server.getPlan()) {
+                case SMALL:
                     info.setText(App.string(R.string.rplan_info_small));
                     break;
-                case "medium":
+                case MEDIUM:
                     info.setText(App.string(R.string.rplan_info_medium));
                     break;
-                case "large":
+                case LARGE:
                     info.setText(App.string(R.string.rplan_info_large));
                     break;
-                case "huge":
+                case HUGE:
                     info.setText(App.string(R.string.rplan_info_huge));
                     break;
-                case "monster":
+                case MONSTER:
                     info.setText(App.string(R.string.rplan_info_monster));
                     break;
             }

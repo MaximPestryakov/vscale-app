@@ -11,6 +11,8 @@
     <string name="exit">Выход</string>
     <string name="token">Токен</string>
     <string name="general">Основные</string>
+    <string name="retry">Повторить</string>
+    <string name="no_internet">Отсутствует интернет подключение</string>
 
     <string name="no_token">Токен не установлен</string>
     <string name="need_token">Для работы приложения необходимо установить токен</string>
