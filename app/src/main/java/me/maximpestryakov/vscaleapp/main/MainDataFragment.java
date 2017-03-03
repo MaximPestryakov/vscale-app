@@ -8,8 +8,8 @@ public class MainDataFragment extends Fragment {
 
     private int state = -1;
 
-    private String dialogTitle;
-    private String dialogMessage;
+    private int dialogTitle;
+    private int dialogMessage;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -25,19 +25,19 @@ public class MainDataFragment extends Fragment {
         this.state = state;
     }
 
-    public String getDialogTitle() {
+    public int getDialogTitle() {
         return dialogTitle;
     }
 
-    public void setDialogTitle(String dialogTitle) {
+    public void setDialogTitle(int dialogTitle) {
         this.dialogTitle = dialogTitle;
     }
 
-    public String getDialogMessage() {
+    public int getDialogMessage() {
         return dialogMessage;
     }
 
-    public void setDialogMessage(String dialogMessage) {
+    public void setDialogMessage(int dialogMessage) {
         this.dialogMessage = dialogMessage;
     }
 }

@@ -11,7 +11,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +20,7 @@ import butterknife.ButterKnife;
 import io.realm.Realm;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
+import me.maximpestryakov.vscaleapp.App;
 import me.maximpestryakov.vscaleapp.R;
 import me.maximpestryakov.vscaleapp.api.model.Server;
 import me.maximpestryakov.vscaleapp.settings.SettingsActivity;
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        presenter = new MainPresenter(this);
+        presenter = new MainPresenter(this, App.from(this));
 
         if (savedInstanceState == null) {
             fragment = new MainDataFragment();
@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
     }
 
     @Override
-    public void showTokenWarning(String title, String message) {
+    public void showTokenWarning(int title, int message) {
         fragment.setState(State.SHOW_TOKEN_WARNING);
         fragment.setDialogTitle(title);
         fragment.setDialogMessage(message);
@@ -122,13 +122,13 @@ public class MainActivity extends AppCompatActivity implements MainView {
                 .setTitle(title)
                 .setMessage(message)
                 .setCancelable(false)
-                .setPositiveButton(getString(R.string.go_to_settings), (dialog, which) -> {
+                .setPositiveButton(R.string.go_to_settings, (dialog, which) -> {
                     Intent intent = new Intent(this, SettingsActivity.class);
                     fragment.setState(-1);
                     startActivity(intent);
 
                 })
-                .setNegativeButton(getString(R.string.exit), (dialog, which) -> finish())
+                .setNegativeButton(R.string.exit, (dialog, which) -> finish())
                 .create();
         warningDialog.show();
     }

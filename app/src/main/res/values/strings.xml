@@ -1,28 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Vscale App</string>
-
+    <string name="app_name" translatable="false">Vscale App</string>
+    <string name="exit">Выход</string>
+    <string name="general">Основные</string>
+    <string name="token_preference_key" translatable="false">token_preference</string>
+    <string name="go_to_settings">Перейти в настройки</string>
+    <string name="need_right_token">Для работы приложения необходимо установить верный токен</string>
+    <string name="need_token">Для работы приложения необходимо установить токен</string>
+    <string name="no_internet">Отсутствует интернет подключение</string>
+    <string name="no_token">Токен не установлен</string>
+    <string name="retry">Повторить</string>
+    <string name="rplan_info_huge">4 ГБ  60 ГБ  2 CPU  1 600 ₽</string>
+    <string name="rplan_info_large">2 ГБ  40 ГБ  2 CPU  800 ₽</string>
+    <string name="rplan_info_medium">1 ГБ  30 ГБ  1 CPU  400 ₽</string>
+    <string name="rplan_info_monster">8 ГБ  80 ГБ  4 CPU  3 200 ₽</string>
+    <string name="rplan_info_small">512 МБ  20 ГБ  1 CPU  200 ₽</string>
     <string name="title_activity_main">Cерверы</string>
     <string name="title_activity_settings">Настройки</string>
-
-    <string name="token_preference_key">token_preference</string>
-
-
-    <string name="go_to_settings">Перейти в настройки</string>
-    <string name="exit">Выход</string>
     <string name="token">Токен</string>
-    <string name="general">Основные</string>
-    <string name="retry">Повторить</string>
-    <string name="no_internet">Отсутствует интернет подключение</string>
-
-    <string name="no_token">Токен не установлен</string>
-    <string name="need_token">Для работы приложения необходимо установить токен</string>
     <string name="wrong_token">Неверный токен</string>
-    <string name="need_right_token">Для работы приложения необходимо установить верный токен</string>
-
-    <string name="rplan_info_small">512 МБ  20 ГБ  1 CPU  200 ₽</string>
-    <string name="rplan_info_medium">1 ГБ  30 ГБ  1 CPU  400 ₽</string>
-    <string name="rplan_info_large">2 ГБ  40 ГБ  2 CPU  800 ₽</string>
-    <string name="rplan_info_huge">4 ГБ  60 ГБ  2 CPU  1 600 ₽</string>
-    <string name="rplan_info_monster">8 ГБ  80 ГБ  4 CPU  3 200 ₽</string>
-
 </resources>

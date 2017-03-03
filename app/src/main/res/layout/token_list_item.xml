@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="72dp"
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true">
+
+    <TextView
+        android:id="@+id/tokenName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:lines="1"
+        android:text="Test"
+        android:textColor="@color/colorPrimaryText"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tokenValue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/tokenName"
+        android:layout_alignLeft="@+id/tokenName"
+        android:layout_alignRight="@id/tokenName"
+        android:layout_alignStart="@+id/tokenName"
+        android:layout_below="@+id/tokenName"
+        android:lines="1"
+        android:text="b4197e4f96c89682ccb6847d453106de85595be62b1858ab86f382f889e477db"
+        android:textColor="@color/colorSecondaryText"
+        android:textSize="14sp" />
+
+</RelativeLayout>

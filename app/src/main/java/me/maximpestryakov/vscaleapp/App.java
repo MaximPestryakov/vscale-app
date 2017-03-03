@@ -1,8 +1,8 @@
 package me.maximpestryakov.vscaleapp;
 
 import android.app.Application;
+import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.preference.PreferenceManager;
 
 import io.realm.Realm;
@@ -16,20 +16,19 @@ public class App extends Application {
 
     private static final String VSCALE_URl = "https://api.vscale.io/v1/";
 
-    private static VscaleApi api;
-    private static SharedPreferences sharedPref;
-    private static Resources resources;
+    private VscaleApi api;
+    private SharedPreferences sharedPref;
 
-    public static VscaleApi getApi() {
+    public static App from(Context context) {
+        return (App) context.getApplicationContext();
+    }
+
+    public VscaleApi getApi() {
         return api;
     }
 
-    public static SharedPreferences getSharedPreferences() {
+    public SharedPreferences getSharedPreferences() {
         return sharedPref;
-    }
-
-    public static String string(int resId) {
-        return resources.getString(resId);
     }
 
     @Override
@@ -39,8 +38,6 @@ public class App extends Application {
         Realm.init(this);
 
         sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-
-        resources = getResources();
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(VSCALE_URl)

@@ -13,7 +13,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import me.maximpestryakov.vscaleapp.App;
 import me.maximpestryakov.vscaleapp.R;
 import me.maximpestryakov.vscaleapp.api.model.Server;
 import me.maximpestryakov.vscaleapp.server.ServerActivity;
@@ -63,7 +62,6 @@ class ServerListAdapter extends RecyclerView.Adapter<ServerListAdapter.ServerVie
         TextView info;
         @BindView(R.id.status)
         AppCompatImageView status;
-        private Server server;
 
         ServerViewHolder(View itemView) {
             super(itemView);
@@ -71,8 +69,6 @@ class ServerListAdapter extends RecyclerView.Adapter<ServerListAdapter.ServerVie
         }
 
         void setServer(Server server) {
-            this.server = server;
-
             name.setText(server.getName());
             switch (server.getOs()) {
                 case CENTOS:
@@ -105,19 +101,19 @@ class ServerListAdapter extends RecyclerView.Adapter<ServerListAdapter.ServerVie
             }
             switch (server.getPlan()) {
                 case SMALL:
-                    info.setText(App.string(R.string.rplan_info_small));
+                    info.setText(R.string.rplan_info_small);
                     break;
                 case MEDIUM:
-                    info.setText(App.string(R.string.rplan_info_medium));
+                    info.setText(R.string.rplan_info_medium);
                     break;
                 case LARGE:
-                    info.setText(App.string(R.string.rplan_info_large));
+                    info.setText(R.string.rplan_info_large);
                     break;
                 case HUGE:
-                    info.setText(App.string(R.string.rplan_info_huge));
+                    info.setText(R.string.rplan_info_huge);
                     break;
                 case MONSTER:
-                    info.setText(App.string(R.string.rplan_info_monster));
+                    info.setText(R.string.rplan_info_monster);
                     break;
             }
         }

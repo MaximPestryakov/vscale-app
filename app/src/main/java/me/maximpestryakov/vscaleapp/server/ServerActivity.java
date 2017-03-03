@@ -44,7 +44,7 @@ public class ServerActivity extends AppCompatActivity implements ServerView {
         ctid = getIntent().getIntExtra("ctid", 0);
         showServerInfo();
 
-        presenter = new ServerPresenter(this);
+        presenter = new ServerPresenter(this, App.from(this));
         presenter.loadServerInfo(ctid);
 
         serverUpdate.setOnRefreshListener(() -> presenter.loadServerInfo(ctid));
@@ -73,6 +73,14 @@ public class ServerActivity extends AppCompatActivity implements ServerView {
                     presenter.startServer(server.getCtid());
                     return true;
                 });
+                break;
+            case DELETED:
+                /*
+                TODO:
+                action when server deleted
+                 */
+                break;
+            default:
                 break;
         }
         menu.add("Переустановить сервер");
@@ -108,19 +116,19 @@ public class ServerActivity extends AppCompatActivity implements ServerView {
         }
         switch (server.getPlan()) {
             case SMALL:
-                serverInfo.setText(App.string(R.string.rplan_info_small));
+                serverInfo.setText(R.string.rplan_info_small);
                 break;
             case MEDIUM:
-                serverInfo.setText(App.string(R.string.rplan_info_medium));
+                serverInfo.setText(R.string.rplan_info_medium);
                 break;
             case LARGE:
-                serverInfo.setText(App.string(R.string.rplan_info_large));
+                serverInfo.setText(R.string.rplan_info_large);
                 break;
             case HUGE:
-                serverInfo.setText(App.string(R.string.rplan_info_huge));
+                serverInfo.setText(R.string.rplan_info_huge);
                 break;
             case MONSTER:
-                serverInfo.setText(App.string(R.string.rplan_info_monster));
+                serverInfo.setText(R.string.rplan_info_monster);
                 break;
         }
     }

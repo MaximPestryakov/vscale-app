@@ -8,14 +8,16 @@ import me.maximpestryakov.vscaleapp.util.MyCallback;
 class ServerPresenter {
 
     private ServerView view;
+    private App app;
 
-    ServerPresenter(ServerView view) {
+    ServerPresenter(ServerView view, App app) {
         this.view = view;
+        this.app = app;
     }
 
     void loadServerInfo(int ctid) {
         view.showLoading();
-        App.getApi().getServer(ctid).enqueue(new MyCallback<>(
+        app.getApi().getServer(ctid).enqueue(new MyCallback<>(
                 (call, response) -> {
                     if (response.isSuccessful()) {
                         Realm realm = Realm.getDefaultInstance();
@@ -30,7 +32,7 @@ class ServerPresenter {
     }
 
     void startServer(int ctid) {
-        App.getApi().startServer(ctid).enqueue(new MyCallback<>(
+        app.getApi().startServer(ctid).enqueue(new MyCallback<>(
                 (call, response) -> {
                     if (response.isSuccessful()) {
                         Server server = response.body();
@@ -49,7 +51,7 @@ class ServerPresenter {
     }
 
     void restartServer(int ctid) {
-        App.getApi().restartServer(ctid).enqueue(new MyCallback<>(
+        app.getApi().restartServer(ctid).enqueue(new MyCallback<>(
                 (call, response) -> {
                     if (response.isSuccessful()) {
                         Server server = response.body();
@@ -68,7 +70,7 @@ class ServerPresenter {
     }
 
     void stopServer(int ctid) {
-        App.getApi().stopServer(ctid).enqueue(new MyCallback<>(
+        app.getApi().stopServer(ctid).enqueue(new MyCallback<>(
                 (call, response) -> {
                     if (response.isSuccessful()) {
                         Server server = response.body();

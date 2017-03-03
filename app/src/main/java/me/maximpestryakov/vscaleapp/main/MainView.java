@@ -4,7 +4,7 @@ interface MainView {
 
     void showServerList();
 
-    void showTokenWarning(String titile, String message);
+    void showTokenWarning(int title, int message);
 
     void showInternetConnectionProblem();
 

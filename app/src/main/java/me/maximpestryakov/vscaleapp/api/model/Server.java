@@ -62,7 +62,7 @@ public class Server extends RealmObject {
     }
 
     public enum Status {
-        STARTED, STOPPED, BILLING
+        STARTED, STOPPED, DELETED, BILLING
     }
 
     public enum Location {
